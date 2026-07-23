@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const API_URL = 'https://YOUR_BACKEND_URL'; // replace with your Render URL
+const API_URL = 'https://payroll-analytics-dashboard.onrender.com';
 
 function DsaFeatures() {
   const [topPaid, setTopPaid] = useState([]);
