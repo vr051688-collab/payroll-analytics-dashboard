@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './index.css'
+import DsaFeatures from './DsaFeatures'
 
 const API_URL = 'https://payroll-analytics-dashboard.onrender.com/api/employees'
 
@@ -83,6 +84,7 @@ export default function App() {
             </div>
           ))}
         </section>
+        <DsaFeatures />
       </main>
     </div>
   )
