@@ -82,7 +82,8 @@ function DsaFeatures() {
     </ul>
   </div>
     
-);</div>
+);
+  </div>
   );
 }
 export default DsaFeatures;     
