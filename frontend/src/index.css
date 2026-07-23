@@ -132,3 +132,90 @@ body {
   font-size: 14px;
   color: #262626;
 }
+.dsa-section {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+}
+
+.dsa-section h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.4rem;
+  background: linear-gradient(90deg, #f7931e, #e91e63);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dsa-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.dsa-table th {
+  background: linear-gradient(90deg, #f7931e, #e91e63);
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+}
+
+.dsa-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.dsa-table tr:last-child td {
+  border-bottom: none;
+}
+
+.dsa-search-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.dsa-input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.dsa-btn-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.gradient-btn-outline {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 2px solid #e91e63;
+  background: #fff;
+  color: #e91e63;
+  font-weight: 600;
+}
+
+.dsa-result {
+  padding: 10px 14px;
+  background: #fff5f5;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.dsa-list {
+  list-style: none;
+  padding: 0;
+}
+
+.dsa-list li {
+  background: #fff;
+  padding: 10px 14px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
