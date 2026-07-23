@@ -1,13 +1,21 @@
 import { useEffect, useState } from 'react'
 import './index.css'
 import DsaFeatures from './DsaFeatures'
+import Login from './Login'
+import Signup from './Signup'
+import ForgotPassword from './ForgotPassword'
 
 const API_URL = 'https://payroll-analytics-dashboard.onrender.com/api/employees'
 
 export default function App() {
+  const [authView, setAuthView] = useState('login') // 'login' | 'signup' | 'forgot'
+  const [token, setToken] = useState(localStorage.getItem('token'))
+
   const [employees, setEmployees] = useState([])
   const [form, setForm] = useState({ name: '', email: '', salary: '' })
   const [loading, setLoading] = useState(true)
+  const [search, setSearch] = useState('')
+  const [deptFilter, setDeptFilter] = useState('All')
 
   const fetchEmployees = async () => {
     try {
@@ -22,8 +30,8 @@ export default function App() {
   }
 
   useEffect(() => {
-    fetchEmployees()
-  }, [])
+    if (token) fetchEmployees()
+  }, [token])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -40,10 +48,41 @@ export default function App() {
     }
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    setToken(null)
+    setAuthView('login')
+  }
+
+  if (!token) {
+    if (authView === 'signup') {
+      return <Signup onSignupSuccess={() => setAuthView('login')} switchToLogin={() => setAuthView('login')} />
+    }
+    if (authView === 'forgot') {
+      return <ForgotPassword switchToLogin={() => setAuthView('login')} />
+    }
+    return (
+      <Login
+        onLogin={(t) => setToken(t)}
+        switchToSignup={() => setAuthView('signup')}
+        switchToForgot={() => setAuthView('forgot')}
+      />
+    )
+  }
+
+  const departments = ['All', ...new Set(employees.map(e => e.department).filter(Boolean))]
+
+  const filteredEmployees = employees.filter(emp => {
+    const matchesSearch = emp.name?.toLowerCase().includes(search.toLowerCase())
+    const matchesDept = deptFilter === 'All' || emp.department === deptFilter
+    return matchesSearch && matchesDept
+  })
+
   return (
     <div className="app">
       <header className="header">
         <h1 className="logo">💸 Payroll Analytics</h1>
+        <button className="gradient-btn-outline logout-btn" onClick={handleLogout}>Logout</button>
       </header>
 
       <main className="main">
@@ -72,20 +111,35 @@ export default function App() {
           <button type="submit" className="gradient-btn">Add</button>
         </form>
 
+        <div className="filter-row">
+          <input
+            className="dsa-input"
+            placeholder="Search by name..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <select
+            className="dsa-input"
+            value={deptFilter}
+            onChange={(e) => setDeptFilter(e.target.value)}
+          >
+            {departments.map(d => <option key={d} value={d}>{d}</option>)}
+          </select>
+        </div>
+
         <section className="grid">
           {loading && <p>Loading...</p>}
-          {!loading && employees.length === 0 && <p>No employees yet.</p>}
-          {employees.map((emp) => (
+          {!loading && filteredEmployees.length === 0 && <p>No employees found.</p>}
+          {filteredEmployees.map((emp) => (
             <div className="card employee-card" key={emp._id}>
               <div className="avatar">{emp.name?.[0]?.toUpperCase()}</div>
               <h3>{emp.name}</h3>
               <p className="email">{emp.email}</p>
+              {emp.department && <p className="dept-tag">{emp.department}</p>}
               <p className="salary">₹{emp.salary?.toLocaleString()}</p>
             </div>
           ))}
         </section>
+
         <DsaFeatures />
       </main>
-    </div>
-  )
-            }
