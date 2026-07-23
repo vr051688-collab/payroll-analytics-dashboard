@@ -30,52 +30,59 @@ function DsaFeatures() {
   };
 
   return (
-    <div style={{ padding: '1.5rem' }}>
-      <h2>Top 10 Highest Paid</h2>
-      <table border="1" cellPadding="8">
-        <thead><tr><th>Name</th><th>Dept</th><th>Salary</th></tr></thead>
-        <tbody>
-          {topPaid.map(e => (
-            <tr key={e._id}><td>{e.name}</td><td>{e.department}</td><td>₹{e.salary}</td></tr>
-          ))}
-        </tbody>
-      </table>
+  <div className="dsa-section">
+    <h2>Top 10 Highest Paid</h2>
+    <table className="dsa-table">
+      <thead><tr><th>Name</th><th>Dept</th><th>Salary</th></tr></thead>
+      <tbody>
+        {topPaid.map(e => (
+          <tr key={e._id}><td>{e.name}</td><td>{e.department}</td><td>₹{e.salary}</td></tr>
+        ))}
+      </tbody>
+    </table>
 
-      <h2>Department-wise Analytics</h2>
-      <table border="1" cellPadding="8">
-        <thead><tr><th>Department</th><th>Count</th><th>Avg Salary</th><th>Total Salary</th></tr></thead>
-        <tbody>
-          {deptData.map(d => (
-            <tr key={d.department}>
-              <td>{d.department}</td><td>{d.count}</td>
-              <td>₹{d.avgSalary}</td><td>₹{d.totalSalary}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <h2>Department-wise Analytics</h2>
+    <table className="dsa-table">
+      <thead><tr><th>Department</th><th>Count</th><th>Avg Salary</th><th>Total Salary</th></tr></thead>
+      <tbody>
+        {deptData.map(d => (
+          <tr key={d.department}>
+            <td>{d.department}</td><td>{d.count}</td>
+            <td>₹{d.avgSalary}</td><td>₹{d.totalSalary}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
 
-      <h2>Search Employee (Binary Search)</h2>
-      <input value={searchId} onChange={e => setSearchId(e.target.value)} placeholder="Employee ID e.g. E003" />
-      <button onClick={handleSearch}>Search</button>
-      {searchResult && (
-        searchResult.error
-          ? <p>{searchResult.error}</p>
-          : <p>{searchResult.name} — {searchResult.department} — ₹{searchResult.salary}</p>
-      )}
-
-      <h2>Salary Sort</h2>
-      <button onClick={() => handleSort('desc')}>High to Low</button>
-      <button onClick={() => handleSort('asc')}>Low to High</button>
-      <ul>
-        {sortedList.map(e => <li key={e._id}>{e.name} — ₹{e.salary}</li>)}
-      </ul>
-
-      <h2>Leave Approval Queue</h2>
-      <ul>
-        {leaveQueue.map((l, i) => <li key={i}>{l.employeeId} — {l.reason}</li>)}
-      </ul>
+    <h2>Search Employee (Binary Search)</h2>
+    <div className="dsa-search-row">
+      <input className="dsa-input" value={searchId} onChange={e => setSearchId(e.target.value)} placeholder="Employee ID e.g. E003" />
+      <button className="gradient-btn" onClick={handleSearch}>Search</button>
     </div>
+    {searchResult && (
+      <p className="dsa-result">
+        {searchResult.error
+          ? searchResult.error
+          : `${searchResult.name} — ${searchResult.department} — ₹${searchResult.salary}`}
+      </p>
+    )}
+
+    <h2>Salary Sort</h2>
+    <div className="dsa-btn-row">
+      <button className="gradient-btn" onClick={() => handleSort('desc')}>High to Low</button>
+      <button className="gradient-btn-outline" onClick={() => handleSort('asc')}>Low to High</button>
+    </div>
+    <ul className="dsa-list">
+      {sortedList.map(e => <li key={e._id}>{e.name} — ₹{e.salary}</li>)}
+    </ul>
+
+    <h2>Leave Approval Queue</h2>
+    <ul className="dsa-list">
+      {leaveQueue.map((l, i) => <li key={i}>{l.employeeId} — {l.reason}</li>)}
+    </ul>
+  </div>
+    
+);</div>
   );
 }
-
-export default DsaFeatures;
+export default DsaFeatures;     
