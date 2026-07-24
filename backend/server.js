@@ -4,6 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const Employee = require('./models/Employee');
+const authRoutes = require('./routes/auth');
 const {
   binarySearchById, quickSortBySalary, mergeSortBySalary,
   buildEmployeeHashMap, LeaveApprovalQueue,
@@ -14,6 +15,7 @@ const leaveQueue = new LeaveApprovalQueue();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/api/auth', authRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
