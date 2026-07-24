@@ -81,9 +81,7 @@ function DsaFeatures() {
       {leaveQueue.map((l, i) => <li key={i}>{l.employeeId} — {l.reason}</li>)}
     </ul>
   </div>
-    
-);
-  </div>
   );
 }
-export default DsaFeatures;     
+
+export default DsaFeatures;
