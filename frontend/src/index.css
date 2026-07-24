@@ -435,3 +435,20 @@ body {
   font-size: 13px;
   color: #fff;
 }
+.chart-bar-row {
+  flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+  .chart-bar-label {
+    width: 70px;
+    font-size: 12px;
+  }
+  .chart-bar-value {
+    width: 70px;
+    font-size: 12px;
+  }
+  .chart-bar-track {
+    min-width: 120px;
+  }
+}
