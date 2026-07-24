@@ -12,7 +12,7 @@ export default function App() {
   const [token, setToken] = useState(localStorage.getItem('token'))
 
   const [employees, setEmployees] = useState([])
-  const [form, setForm] = useState({ name: '', email: '', salary: '' })
+  const [form, setForm] = useState({ name: '', email: '', salary: '', department: '' })
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [deptFilter, setDeptFilter] = useState('All')
@@ -41,7 +41,7 @@ export default function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...form, salary: Number(form.salary) }),
       })
-      setForm({ name: '', email: '', salary: '' })
+      setForm({ name: '', email: '', salary: '', department: '' })
       fetchEmployees()
     } catch (err) {
       console.error(err)
@@ -108,6 +108,12 @@ export default function App() {
             onChange={(e) => setForm({ ...form, salary: e.target.value })}
             required
           />
+          <input
+            placeholder="Department"
+            value={form.department}
+            onChange={(e) => setForm({ ...form, department: e.target.value })}
+            required
+          />
           <button type="submit" className="gradient-btn">Add</button>
         </form>
 
@@ -145,4 +151,4 @@ export default function App() {
       </main>
     </div>
   )
-}
+          }
