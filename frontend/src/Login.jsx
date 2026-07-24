@@ -7,6 +7,7 @@ function Login({ onLogin, switchToSignup, switchToForgot }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,17 +47,25 @@ function Login({ onLogin, switchToSignup, switchToForgot }) {
             onChange={e => setEmail(e.target.value)}
             required
           />
-          <input
-            className="dsa-input"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-          />
+          <div className="password-wrapper">
+            <input
+              className="dsa-input"
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+            />
+            <span
+              className="password-toggle"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? '🙈' : '👁️'}
+            </span>
+          </div>
           {error && <p className="auth-error">{error}</p>}
           <button className="gradient-btn auth-submit" type="submit" disabled={loading}>
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? 'Waking up server, please wait...' : 'Login'}
           </button>
         </form>
         <div className="auth-links">
